@@ -1,0 +1,120 @@
+<p-dialog header="{{ 'COMMON.search_employee' | translate}}" align="center" [(visible)]="display" [modal]="true" [responsive]="true" [width]="1800" [minWidth]="200"
+          [baseZIndex]="10000">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <!--start upper body-->
+      <div class="card no-margin">
+        <div class="ui-g form-group ui-fluid">
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <label for="input">{{ 'COMMON.company' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <p-dropdown [options]="orgLevelOneDDL" [(ngModel)]="searchOrgLevelOne" optionLabel="name" [autoWidth]="false" placeholder="{{ 'COMMON.all' | translate}}" [showClear]="true" (onChange)="getOrgLevelTwo();"></p-dropdown>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2 txt">
+            <label for="input">{{ 'EMP001.line_of_work' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <p-dropdown [options]="orgLevelTwoDDL" [(ngModel)]="searchOrgLevelTwo" optionLabel="name" [autoWidth]="false" placeholder="{{ 'COMMON.all' | translate}}" [showClear]="true" (onChange)="getOrgLevelThree();"></p-dropdown>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2 txt">
+            <label for="input">{{ 'EMP001.department' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <p-dropdown [options]="orgLevelThreeDDL" [(ngModel)]="searchOrgLevelThree" optionLabel="name" [autoWidth]="false" placeholder="{{ 'COMMON.all' | translate}}" [showClear]="true"></p-dropdown>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <label for="input">{{ 'EMP001.employee_no' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <input id="input" type="text" [(ngModel)]="searchEmployeeNo" pInputText />
+          </div>
+
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <label for="input">{{ 'EMP001.name_surname' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <input id="input" type="text" [(ngModel)]="searchName" pInputText />
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2 txt">
+            <label for="input">{{ 'EMP001.employee_status' | translate}} : </label>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+            <p-dropdown [options]="employeeStatusDDL" [(ngModel)]="searchEmployeeStatus" optionLabel="name" [autoWidth]="false" placeholder="{{ 'COMMON.all' | translate}}" [showClear]="true"></p-dropdown>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-lg-2">
+          </div>
+          <div class="ui-g-12 ui-md-6 ui-lg-4">
+            <!--#region search and close button-->
+            <div class="ui-g-12 ui-md-6 ui-lg-6"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6" align="right">
+              <button pButton type="button" label="{{ 'COMMON.search' | translate}}" icon="fa fa-search" iconPos="left" (click)="search();" class="imc-button"></button>
+              <button pButton type="button" label="{{ 'COMMON.close' | translate}}" icon="fa fa-close" iconPos="left" (click)="closeDialog();" class="btn-back imc-button"></button>
+            </div>
+          </div> <!--end search and close button-->
+        </div> <!--end ui-g form-group ui-fluid-->
+        <!--<div class="ui-g-12 ui-md-12" style="text-align:right">
+
+      </div>-->
+
+      </div>
+    </div> <!--end upper body-->
+
+    <div class="ui-g-12">
+      <div class="card no-margin">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th width="5%"><label for="input">{{ 'COMMON.order' | translate}}</label></th>
+              <th width="20%"><label for="input">{{ 'EMP001.name_surname' | translate}}</label></th>
+              <th width="10%"><label for="input">{{ 'EMP001.employee_no' | translate}}</label></th>
+              <th width="10%"><label for="input">{{ 'COMMON.email' | translate}}</label></th>
+              <th width="10%"><label for="input">{{ 'COMMON.company' | translate}}</label></th>
+              <th width="10%"><label for="input">{{ 'EMP001.line_of_work' | translate}}</label></th>
+              <th width="10%"><label for="input">{{ 'EMP001.department' | translate}}</label></th>
+              <th width="5%"><label for="input">{{ 'EMP001.employee_status' | translate}}</label></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let item of searchEmployee; let i = index" (click)="onSelect(item)">
+              <td>{{i+1}}</td>
+              <td style="text-align: left;">
+                <div class="contacts">
+                  <img library="verona-layout" src="{{item.originalPicture}}" style="max-height:45px; min-height:45px; max-width:45px; min-width:45px; display: block; margin-left: auto; margin-right: auto; border-radius:50%">
+                  <div class="contact-info">
+                    <span class="name">&nbsp;{{item.name}}&nbsp;&nbsp;{{item.surname}}</span><br/>
+                    <span class="location">&nbsp;{{item.positionName}}</span>
+                  </div>
+                </div>
+              </td>
+              <td>{{item.employeeNo}}</td>
+              <td>{{item.emailAddress}}</td>
+              <td>{{item.orgLevelOneName}}</td>
+              <td>{{item.orgLevelTwoName}}</td>
+              <td>{{item.orgLevelThreeName}}</td>
+              <td>{{item.employeeStatusName}}</td>
+            </tr>
+            <tr *ngIf="searchEmployee?.length == 0 || searchEmployee == null">
+              <td colspan="8" class="no-data-available">No data!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  </div>
+  <!--test
+  <button (click)="sendMessage()">test send</button>-->
+</p-dialog>
+
+
+<div class="ui-inputgroup">
+  <input type="text" pInputText [(ngModel)]="popupPlaceholder" readonly="readonly">
+  <button pButton type="button" icon="fa fa-search" (click)="showDialog()" class="ui-button-secondary"></button>
+</div>

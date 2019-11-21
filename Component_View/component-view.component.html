@@ -1,0 +1,129 @@
+<p-growl [value]="msgs" sticky="sticky"></p-growl>
+
+
+<!--<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <input type="hidden" [(ngModel)]="components.componentId" formControlName="componentId" />-->
+<p-panel header="Component Detail">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid spec-txt">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.parent' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+        <!--<p-autoComplete [(ngModel)]="parentDDL" [suggestions]="filteredSingle" (completeMethod)="filterSingle($event)" field="label" [size]="30"
+            placeholder="Parent Component" [minLength]="1" [dropdown]="true" [disabled]="true"></p-autoComplete>-->
+        {{parent.label}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.label' | translate}} *:
+      </div>
+      <div class="ui-grid-col-6">
+        {{components.label}}
+      </div>
+      <div class="ui-grid-col-4">
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.label_EN' | translate}} *:
+      </div>
+      <div class="ui-grid-col-6">
+        {{components.label_EN}}
+      </div>
+      <div class="ui-grid-col-4">
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.function_code' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+        
+        {{components.functionCode}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.function_caption' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+       
+        {{components.functionCaption}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.screen_sequence' | translate}} *:
+      </div>
+      <div class="ui-grid-col-6">
+        
+        {{components.screenSequence}}
+      </div>
+      <div class="ui-grid-col-4">
+
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.path' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+       
+        {{components.path}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.icon' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+        
+        {{components.icon}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'SYS001.permission' | translate}} :
+      </div>
+      <div class="ui-g-12 ui-md-6">
+            {{components.permissionName}}&nbsp;
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        {{ 'COMMON.status' | translate}} :
+      </div>
+      <div class="ui-grid-col-6">
+        {{components.status}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        <label for="input">{{ 'COMMON.modified_by' | translate}} : </label>
+      </div>
+      <div class="ui-grid-col-6">
+        {{components.modifiedBy}}
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2">
+        <label for="input">{{ 'COMMON.date_modified' | translate}} : </label>
+      </div>
+      <div class="ui-grid-col-6">
+        {{components.dateModified == null ? "-" : components.dateModified | dateTimeFormat}}
+      </div>
+    </div>
+    <div class="ui-grid-row spec-txt">
+      <div class="ui-grid-col-8" style="text-align:right">
+        <button pButton type="button" label="{{ 'COMMON.back' | translate}}" (click)="back();" class="imc-button btn-back"></button>
+      </div>
+    </div>
+  </div>
+</p-panel>
+<!--</form>-->
+
+<p-confirmDialog></p-confirmDialog>
+
+

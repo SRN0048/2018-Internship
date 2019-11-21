@@ -1,0 +1,38 @@
+.buttonContainer{
+  padding-left: 970px;
+}
+
+.contacts ul li {
+  border-bottom: 1px solid #dddddd;
+  padding: 10px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.contacts ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.location {
+  margin-top: 4px;
+  display: block;
+  font-size: 12px;
+  color: #7a7a7a;
+}
+
+.contacts img {
+  float: left;
+  margin-right: 8px;
+}

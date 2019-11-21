@@ -1,0 +1,409 @@
+<p-growl [value]="msgs"></p-growl>
+
+<p-accordion>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <!--#region contain-all-panel-->
+
+      <p-accordionTab header="ข้อมูลที่อยู่ / Address" [selected]="true">
+        <form [formGroup]="form" (ngSubmit)="onSubmitAddress(form.value)">
+
+          <div style="font-weight: bold">ที่อยู่ตามทะเบียนบ้าน / Register Address</div><!--region Register Address-->
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.address' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-10">
+                  <input pInputText type="text" [(ngModel)]="employeeAddress.address" formControlName="address" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['address'].valid&&form.controls['address'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.province' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="provinces" optionLabel="name" [autoWidth]="false" [filter]="true" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="provinceDDL" formControlName="provinceId" (onChange)="getDistrictRegisAddress();"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['provinceId'].valid&&form.controls['provinceId'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.district' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="districts" optionLabel="name" [autoWidth]="false" [filter]="true" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="districtDDL" formControlName="districtId"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['districtId'].valid&&form.controls['districtId'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.subdistrict' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddress.subdistrict" formControlName="subdistrict" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['subdistrict'].valid&&form.controls['subdistrict'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.postal_code' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddress.postalCode" formControlName="postalCode" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['postalCode'].valid&&form.controls['postalCode'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001.telephone_no' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddress.phoneNo" formControlName="phoneNo" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['phoneNo'].valid&&form.controls['phoneNo'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end Register Address-->
+
+          <div style="font-weight: bold">ที่อยู่ที่ติดต่อได้ / Contact Address</div> <!--region Contact Address-->
+
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.address' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-10">
+                  <input pInputText type="text" [(ngModel)]="employeeAddressContact.address" formControlName="address_ca" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['address_ca'].valid&&form.controls['address_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.province' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="provinces_ca" optionLabel="name" [autoWidth]="false" [filter]="true" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="provinceDDL_ca" formControlName="province_ca" (onChange)="getDistrictContactAddress();"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['province_ca'].valid&&form.controls['province_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.district' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="districts_ca" optionLabel="name" [autoWidth]="false" [filter]="true" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="districtDDL_ca" formControlName="district_ca"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['district_ca'].valid&&form.controls['district_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.subdistrict' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddressContact.subdistrict" formControlName="subDistrict_ca" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['subDistrict_ca'].valid&&form.controls['subDistrict_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.postal_code' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddressContact.postalCode" formControlName="postNo_ca" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['postNo_ca'].valid&&form.controls['postNo_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001.telephone_no' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeAddressContact.phoneNo" formControlName="phoneNo_ca" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!form.controls['phoneNo_ca'].valid&&form.controls['phoneNo_ca'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                  <div class="checkBox"><p-checkbox name="group1" label="{{ 'EMP001_T01.use_same_address' | translate}}" (onChange)="useSameAddress1()"></p-checkbox></div>
+                </div>
+              </div>
+              <div class="ui-g spec-txt" style="text-align:right;">
+                <div class="ui-g-12 ui-md-6 ui-md-offset-6 ui-lg-1 ui-lg-offset-10">
+                  <button pButton type="submit" label="{{ 'COMMON.save' | translate}}" [disabled]="!form.valid" class="imc-button"></button>
+                </div>
+              </div>
+            </div>
+
+          </div><!--end Contact Address-->
+        </form> <!--end Address-->
+      </p-accordionTab> <!--Address-->
+
+      <p-accordionTab header="ผู้ติดต่อกรณีฉุกเฉิน">
+        <form [formGroup]="accForm" (ngSubmit)="onSubmitContactPerson(accForm.value)">
+          <!--region Emergency contact-->
+          <input type="hidden" [(ngModel)]="employeeContactPerson.employeeId" formControlName="employeeId" />
+
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001_T03.name' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeContactPerson.contactPersonName" formControlName="contactPersonName" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonName'].valid&&accForm.controls['contactPersonName'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001_T03.surname' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="employeeContactPerson.contactPersonSurname" formControlName="contactPersonSurname" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonSurname'].valid&&accForm.controls['contactPersonSurname'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001_T03.relationship' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown optionLabel="name" [options]="relationShipDDL" placeholder="{{ 'COMMON.default_select' | translate}}" [autoWidth]="false" [showClear]="true" [(ngModel)]="relationShipDDL_acc" formControlName="contactPersonRelationShipId"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonRelationShipId'].valid&&accForm.controls['contactPersonRelationShipId'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.address' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-10">
+                  <input pInputText type="text" [(ngModel)]="contactPersonAddress" formControlName="contactPersonAddress" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonAddress'].valid&&accForm.controls['contactPersonAddress'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.province' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="provinces_acc" optionLabel="name" [autoWidth]="false" [filter]="true" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="provinceDDL_acc" formControlName="contactPersonProvinceId" (onChange)="getDistrictContactPerson();"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonProvinceId'].valid&&accForm.controls['contactPersonProvinceId'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.district' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <p-dropdown [options]="districts_acc" optionLabel="name" [autoWidth]="false" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}" [(ngModel)]="districtDDL_acc" formControlName="contactPersonDistrictId"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonDistrictId'].valid&&accForm.controls['contactPersonDistrictId'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.subdistrict' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="contactPersonSubdistrict" formControlName="contactPersonSubDistrict" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonSubDistrict'].valid&&accForm.controls['contactPersonSubDistrict'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'COMMON.postal_code' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="contactPersonPostalCode" formControlName="contactPersonPostalCode" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonPostalCode'].valid&&accForm.controls['contactPersonPostalCode'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                  <label for="input">{{ 'EMP001.telephone_no' | translate}} *: </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                  <input pInputText type="text" [(ngModel)]="contactPersonPhoneNo" formControlName="contactPersonPhoneNo" />
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <div class="ui-message ui-messages-error ui-corner-all warn" *ngIf="!accForm.controls['contactPersonPhoneNo'].valid&&accForm.controls['contactPersonPhoneNo'].dirty">
+                    <i class="fa fa-close"></i>
+                    {{ 'COMMON.required' | translate}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                  <div class="checkBox"><p-checkbox name="group1" label="{{ 'EMP001_T01.use_same_address' | translate}}" (onChange)="useSameAddress2()"></p-checkbox></div>
+                </div>
+              </div>
+              <div class="ui-g spec-txt">
+                <div class="ui-g-6 ui-md-6 ui-lg-1 ui-lg-offset-9">
+                  <button pButton type="submit" label="{{contactPersonId != null ? ('COMMON.save'  | translate) : 'COMMON.add' | translate}}" [disabled]="!accForm.valid"></button>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-1">
+                  <button pButton type="button" label="{{ 'COMMON.cancel' | translate}}" (click)="eraseContactPersonForm();" class="btn-back"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-col spec-txt">
+            <table datatable [dtOptions]="dtOptions" class="row-border hover" style="width: 100%" [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th style="display:none;"></th>
+                  <th width="10%">{{ 'EMP001_T03.relationship' | translate}}</th>
+                  <th width="20%">{{ 'EMP001.name_surname' | translate}}</th>
+                  <th width="45%">{{ 'COMMON.address' | translate}}</th>
+                  <th width="10%">{{ 'EMP001.telephone_no' | translate}}</th>
+                  <th width="180px">{{ 'COMMON.action' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let person of employeeContactPersonArray; let i = index">
+                  <td>{{person.nameContactPersonRelationShip}}</td>
+                  <td>{{person.contactPersonName}}&nbsp;&nbsp;{{person.contactPersonSurname}}</td>
+                  <td>{{person.contactPersonAddress}}&nbsp;&nbsp;{{person.contactPersonSubdistrict}}&nbsp;&nbsp;{{person.nameContactPersonDistrict}}&nbsp;&nbsp;{{person.nameContactPersonProvince}}</td>
+                  <td>{{person.contactPersonPhoneNo}}</td>
+                  <td class="center">
+                    <button pButton type="button" label="{{ 'COMMON.edit' | translate}}" icon="fa fa-edit" (click)="editContactPerson(person.contactPersonId); param='person.contactPersonId';" [disabled]="!permission.allowEdit" class="imc-button"></button>&nbsp;
+                    <button pButton type="button" label="{{ 'COMMON.delete' | translate}}" icon="fa fa-trash" (click)="deleteContactPerson(person.contactPersonId); param='person.contactPersonId';" [disabled]="!permission.allowDelete" class="imc-button"></button>
+                  </td>
+                </tr>
+                <tr *ngIf="employeeContactPersonArray?.length == 0">
+                  <td colspan="5" class="no-data-available">No data!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form> <!--end ContactPerson-->
+      </p-accordionTab> <!--ContactPerson-->
+
+      <p-accordionTab header="เอกสารประกอบ">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <div class="ui-g">
+              <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                <label for="input">{{ 'EMP001_T05.document_type' | translate}} *: </label>
+              </div>
+              <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-dropdown optionLabel="name" [options]="documentTypeDDL" [autoWidth]="false" [(ngModel)]="documentTypeId" [showClear]="true" placeholder="{{ 'COMMON.default_select' | translate}}"></p-dropdown>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-12 ui-md-12 ui-lg-1 txt">
+                <label for="input">{{ 'EMP001_T05.choose_file' | translate}} : </label>
+              </div>
+              <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-fileUpload #fubauto mode="basic" accept=".jpg,.jpeg,.bmp,.png,.pdf,.doc,.docx" maxFileSize="1000000" (onSelect)="uploadFile($event)" auto="true" chooseLabel="Choose" [disabled]="documentTypeId==null"></p-fileUpload>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-col-12 spec-txt">
+          <table datatable [dtOptions]="dtOptions" class="row-border hover" style="width: 100%" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th style="display:none;"></th>
+                <th><label for="input">{{ 'EMP001_T05.document_type' | translate}}</label></th>
+                <th><label for="input">{{ 'EMP001_T05.file_name' | translate}}</label></th>
+                <th><label for="input">{{ 'COMMON.action' | translate}}</label></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of employeeDocuments; let i = index">
+                <td>{{item.documentTypeName}}</td>
+                <td>{{item.fileName}}</td>
+                <td class="center">
+                  <button pButton type="button" label="{{ 'COMMON.download' | translate}}" icon="fa fa-download" (click)="downloadDocument(item); param='item';" [disabled]="!permission.allowEdit" style="width:110px"></button>&nbsp;
+                  <button pButton type="button" label="{{ 'COMMON.delete' | translate}}" icon="fa fa-trash" (click)="deleteDocument(item.documentId); param='item.documentId';" [disabled]="!permission.allowDelete" class="imc-button"></button>
+                </td>
+              </tr>
+              <tr *ngIf="employeeDocuments?.length == 0">
+                <td colspan="5" class="no-data-available">No data!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </p-accordionTab>
+    </div> <!--end contain-all-panel-->
+  </div>
+</p-accordion>
